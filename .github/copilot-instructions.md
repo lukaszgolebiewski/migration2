@@ -57,3 +57,4 @@ The two layers are deliberately separated. Blueprint code must never contain env
 6. **Plan before agent execution.** For any change proposed to be performed by an agent/subagent, Copilot must first present a concrete plan (scope, files, risks, rollback) and wait for explicit user approval.
 7. **No implicit execution.** Copilot must not run agent/subagent implementation steps until the user explicitly accepts the plan.
 8. **If no approval, no changes.** Without explicit approval, only analysis/clarification is allowed.
+9. **No duplication across guidance layers.** Rules must be defined in exactly one place: constitution, instruction files, skills, or agents. Do not repeat the same rule across these layers. If `azure.instructions.md` defines an Azure rule, that rule must not be duplicated in Azure-related agents or skills; other layers should reference it instead of restating it.
