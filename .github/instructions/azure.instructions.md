@@ -86,6 +86,67 @@ All resources follow this general pattern:
 - Artifacts: `.tfplan` files published between stages.
 - All pipeline steps run under the project service principal via `AzureCLI@2`.
 
+## Well-Architected Framework (WAF) Compliance
+
+Every Azure resource should be reviewed against the five WAF pillars. Use these as a checklist when creating or modifying infrastructure:
+
+### Reliability
+- **Availability Zones**: Use zone-redundant SKUs for production-critical resources (e.g., `ZRS`/`GZRS` for storage, zone-redundant App Service plans, AKS with zone spread).
+- **Health probes**: Configure health check endpoints for load-balanced and app-hosting resources.
+- **Multi-region readiness**: Document geo-replication or failover strategy for resources that support it. Active-active is preferred over active-passive where cost allows.
+- **BGP / dynamic routing**: Use dynamic routing over static for VPN and ExpressRoute gateways.
+
+### Cost Optimization
+- **SKU right-sizing**: Select the lowest-cost SKU that meets performance and SLA requirements. Document the rationale when choosing premium tiers.
+- **Expensive resources should be optional**: Gate costly components (Firewall, VPN Gateway, Bastion) behind feature toggles so non-production environments can omit them.
+- **Cost tracking tags**: Every resource must include tags enabling cost attribution (see Tagging Strategy below).
+- **Start/stop schedules**: Apply to non-production compute resources (VMs, Batch pools) — handled via the existing scheduling pipeline.
+
+### Performance Efficiency
+- **Autoscaling**: Enable autoscale for resources that support it (VMSS, App Service, AKS, Container Apps). Define sensible min/max/default values.
+- **Accelerated networking**: Enable on VMs and VMSS where the SKU supports it.
+- **Service endpoints**: Use service endpoints or private endpoints to minimise network hops and latency to PaaS services.
+
+### Operational Excellence
+- **NSG Flow Logs**: Enable for all NSGs in production to support traffic analysis and troubleshooting.
+- **Infrastructure documentation**: Every module should include a brief header comment or README describing its purpose, dependencies, and expected WAF posture.
+- **Input validation**: Use `validation {}` blocks on variables with known constraints (e.g., allowed SKU values, CIDR ranges, naming patterns).
+
+> **Note:** Security and Operational Excellence diagnostic requirements are defined in `terraform-security.instructions.md`. Do not duplicate them here.
+
+## Tagging Strategy
+
+All resources must include the following tags at minimum:
+
+| Tag | Source | Purpose |
+|-----|--------|---------|
+| `environment` | `var.env_shortname` | Environment identification |
+| `project` | `var.project_shortname` | Project attribution |
+| `managed-by` | `"terraform"` | Identifies IaC-managed resources |
+
+Additional recommended tags (define in settings when applicable):
+
+| Tag | Purpose |
+|-----|---------|
+| `owner` | Team or individual accountable for the resource |
+| `cost-center` | Financial cost attribution |
+
+Tags are defined in settings and applied consistently via module variables. Never hardcode tag values in blueprint code.
+
+## CAF Compliance Checklist
+
+When adding any new Azure resource, verify:
+
+- [ ] **Naming** follows the conventions table above.
+- [ ] **Tags** include at least `environment`, `project`, and `managed-by`.
+- [ ] **Managed identity** is used instead of service principal secrets for runtime auth.
+- [ ] **Private endpoint** is configured (public access disabled by default).
+- [ ] **Diagnostic setting** wires to Log Analytics (see `terraform-security.instructions.md`).
+- [ ] **Encryption** at rest and in transit is enabled (TLS 1.2+, infrastructure encryption where available).
+- [ ] **RBAC** via AD groups — no direct individual identity assignments.
+- [ ] **Availability zones** are enabled for production-critical resources.
+- [ ] **Resource organisation** places the resource in the correct subscription and resource group.
+
 ## Azure Verified Modules
 
 - Prefer [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) when starting a new module, unless existing project patterns conflict.
