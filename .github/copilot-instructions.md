@@ -52,5 +52,8 @@ The two layers are deliberately separated. Blueprint code must never contain env
 1. **Preserve the blueprint ↔ settings separation.** Configuration values go in `settings/`; logic goes in `blueprint/`.
 2. **Follow existing patterns.** Before generating new code, study adjacent files in the same module for style, naming, and structure.
 3. **Respect the import mechanism.** New modules must include `import.tfsettings-*.tf` and corresponding `.TEMPLATE` files with `###env_shortname###` placeholders.
-4. **Generate all four environment variants** when creating settings files (`dev`, `test`, `snd`, `prod`).
+4. **Never generate all four environment variants** when creating settings files (`dev`, `test`, `snd`, `prod`) — only the one specified by the user. 
 5. **Explain trade-offs** when multiple valid approaches exist.
+6. **Plan before agent execution.** For any change proposed to be performed by an agent/subagent, Copilot must first present a concrete plan (scope, files, risks, rollback) and wait for explicit user approval.
+7. **No implicit execution.** Copilot must not run agent/subagent implementation steps until the user explicitly accepts the plan.
+8. **If no approval, no changes.** Without explicit approval, only analysis/clarification is allowed.
