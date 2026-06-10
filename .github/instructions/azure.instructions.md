@@ -75,7 +75,7 @@ All resources follow this general pattern:
 ## Monitoring & Observability
 
 - Every resource group has a Log Analytics workspace and App Insights instance provisioned in the `core/` module.
-- All resources wire diagnostics to `la-{project_shortname}-main-{env_shortname}`.
+- All resources wire diagnostics to the main Log Analytics workspace in their environment (e.g., `la-pada-iadwh-main-dev`).
 - Pipeline health checks are handled by the `scheduled-pinging.yml` template.
 
 ## Azure DevOps Pipelines
