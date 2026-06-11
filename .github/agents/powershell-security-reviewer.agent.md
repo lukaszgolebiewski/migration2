@@ -1,6 +1,6 @@
 ---
 description: "Perform comprehensive PowerShell security assessments. Reviews credential handling, secrets exposure, injection vulnerabilities, Azure auth flows, and unsafe defaults. Use when: security review, check for secrets, audit, credential review, vulnerability scan."
-tools: ["read_file", "semantic_search", "grep_search", "file_search", "manage_todo_list", "memory"]
+tools: ["read_file", "filesystem:read", "terminal", "semantic_search", "grep_search", "file_search", "manage_todo_list", "memory"]
 ---
 
 # PowerShell Security Reviewer Agent
@@ -59,7 +59,7 @@ Follow the rules defined in:
 
 ## Report Format
 
-Use the `powershell-review-reporting` skill structure. Severity levels:
+Use the `review-reporting` skill structure. Severity levels:
 
 | Severity | Criteria |
 |---|---|
