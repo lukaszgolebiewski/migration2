@@ -1,6 +1,6 @@
 ---
 description: "Perform comprehensive PowerShell security assessments. Reviews credential handling, secrets exposure, injection vulnerabilities, Azure auth flows, and unsafe defaults. Use when: security review, check for secrets, audit, credential review, vulnerability scan."
-tools: ["read_file", "filesystem:read", "terminal", "semantic_search", "grep_search", "file_search", "manage_todo_list", "memory"]
+tools: ["read_file", "filesystem:read", "terminal", "semantic_search", "grep_search", "file_search", "manage_todo_list", "execute/runInTerminal", "listdirectory","vscode/memory"]
 ---
 
 # PowerShell Security Reviewer Agent
