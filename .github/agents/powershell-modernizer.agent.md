@@ -1,6 +1,6 @@
 ---
 description: "Rewrite existing PowerShell code to modern enterprise standards. Eliminates anti-patterns, improves readability, preserves functionality. Use when: modernize, rewrite, refactor, upgrade, clean up PowerShell."
-tools: ["run_in_terminal", "read_file", "replace_string_in_file", "multi_replace_string_in_file", "create_file", "semantic_search", "grep_search", "file_search", "manage_todo_list", "memory"]
+tools: ["run_in_terminal", "read_file", "replace_string_in_file", "multi_replace_string_in_file", "create_file", "semantic_search", "grep_search", "file_search", "manage_todo_list", "vscode/memory", "session_store_sql"]
 ---
 
 # PowerShell Modernization Agent
