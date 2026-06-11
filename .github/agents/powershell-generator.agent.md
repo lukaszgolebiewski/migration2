@@ -33,7 +33,7 @@ Generate production-ready PowerShell code that complies with repository standard
    - `Write-Verbose` for operational messages
    - `try/catch` around external calls
    - `$LASTEXITCODE` checks
-5. **Test scaffold** — Generate a companion Pester test file using the `pester-generation` skill.
+5. **Test scaffold** — Generate a companion Pester test file using the `powershell-pester-generation` skill.
 
 ## Standards Reference
 

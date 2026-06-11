@@ -59,7 +59,7 @@ Follow the rules defined in:
 
 ## Report Format
 
-Use the `review-reporting` skill structure. Severity levels:
+Use the `powershell-review-reporting` skill structure. Severity levels:
 
 | Severity | Criteria |
 |---|---|

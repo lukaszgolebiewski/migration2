@@ -16,7 +16,7 @@ Rewrite existing PowerShell scripts to comply with modern enterprise standards w
 1. **Analyze** — Read the target script and adjacent files for context. Identify all anti-patterns.
 2. **Plan** — Present a numbered modernization plan. Wait for explicit user approval before proceeding.
 3. **Execute** — Apply changes file-by-file. Mark each todo as completed immediately.
-4. **Report** — Generate a migration report using the `review-reporting` skill format.
+4. **Report** — Generate a migration report using the `powershell-review-reporting` skill format.
 
 ## Modernization Checklist
 
@@ -53,7 +53,7 @@ After modernization, recommend a security review if credential handling or Azure
 
 ## Report Format
 
-Use the `review-reporting` skill output structure. Each finding must include:
+Use the `powershell-review-reporting` skill output structure. Each finding must include:
 - **Location**: file:line
 - **Category**: naming | parameters | error-handling | logging | security | style
 - **Before**: original code snippet (≤ 3 lines)
