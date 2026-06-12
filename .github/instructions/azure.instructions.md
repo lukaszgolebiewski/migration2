@@ -137,7 +137,7 @@ Tags are defined in settings and applied consistently via module variables. Neve
 
 When adding any new Azure resource, verify:
 
-- [ ] **Naming** follows the conventions table above.
+- [ ] **Naming** follows the conventions table above. If the resource type is not listed in the naming table, do not invent a naming pattern. Stop and ask for the correct convention or use the nearest approved pattern documented in the project.
 - [ ] **Tags** include at least `environment`, `project`, and `managed-by`.
 - [ ] **Managed identity** is used instead of service principal secrets for runtime auth.
 - [ ] **Private endpoint** is configured (public access disabled by default).
